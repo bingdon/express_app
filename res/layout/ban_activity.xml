@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <include
+        android:id="@+id/ban_headbar"
+        layout="@layout/headbar_view" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ban_headbar"
+        android:background="@drawable/bg480" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:text="大陆进出口违法禁寄送品"
+            android:textColor="@color/head_bar_txt"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/textView1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="left"
+            android:text="第1条  各种武器、仿真武器（仿真玩具枪等）、弹药、火药、雷管及爆炸物品等；\n第2条  国家货币（现金等）、外币、有价证券、伪造的货币及伪造的有价证券；\n第3条  对中国政治、经济、文化、道德（法轮功等）有害的，内容涉及国家秘密的手稿、印刷品、胶卷、照片、唱片、影片、录音带、录像带、激光视盘、计算机存储介质及其他物品；\n第4条  各类烈性毒药及传染性物品。如农药、铊、氰化物、砒霜、催泪弹等；\n第5条  鸦片（包括罂粟壳、花、苞、叶等）、吗啡、海洛因、大麻以及其它能使人成瘾的麻醉品、精神药物；\n第6条  白色粉状物品，白色晶体状物品、白色液体物品；\n第7条  带有危险性病菌、害虫及其它有害生物的动物、植物及其产品；\n第8条  有碍人畜健康的、来自疫区的以及其他能传播疾病的食品、药品及其它食品；\n第9条  珍贵文物及其它禁止出境的文体；\n第10条  濒危的和珍贵的动物及其它产品（如濒危及珍稀动物皮革、毛皮等）、植物（均含标本）及其种子和繁殖材料；\n第11条  金银等贵重金属及其制品；\n第12条  泥土。"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="CutPasteId">
+        <ignore path="src\com\wukong\fragment\MainFragment.java" />
+        <ignore path="src\com\wukong\login\ForgetActivity.java" />
+        <ignore path="src\com\wukong\more\AboutActivity.java" />
+    </issue>
+    <issue id="NewApi">
+        <ignore path="src\com\wukong\login\LoginActivity.java" />
+        <ignore path="src\com\wukong\login\LoginActivity.java" />
+    </issue>
+    <issue id="ShowToast">
+        <ignore path="src\com\wukong\login\LoginActivity.java" />
+        <ignore path="src\com\wukong\login\LoginActivity.java" />
+    </issue>
+</lint>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <include
+        android:id="@+id/suggest_headbar"
+        layout="@layout/headbar_view" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/suggest_headbar"
+        android:background="@drawable/bg480"
+        android:gravity="center|top" >
+
+        <EditText
+            android:id="@+id/suggest_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/support_inputbox1"
+            android:gravity="top|left"
+            android:hint="哪里不足，评价一下？"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/suggest_emails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/suggest_content"
+            android:layout_below="@+id/suggest_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/support_inputbox2"
+            android:ems="10"
+            android:hint="请输入您的联系邮箱"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textSize="15sp" >
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/suggest_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/suggest_emails"
+            android:layout_below="@+id/suggest_emails"
+            android:layout_marginTop="45dp"
+            android:background="@drawable/forget_submit_selector"
+            android:text="提交"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/actionbar" >
+
+        <RelativeLayout
+            android:id="@+id/headbar_left_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="43dp"
+            android:visibility="gone" >
+
+            <ImageView
+                android:id="@+id/headbar_left_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/headbar_left_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/headbar_left_btn"
+                android:textColor="@color/head_bar_txt" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/headbar_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="登录"
+            android:textSize="15sp" />
+
+        <RelativeLayout
+            android:id="@+id/headbar_right_layout"
+            android:layout_width="60dp"
+            android:layout_height="43dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="15dp"
+            android:gravity="center|right" 
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/headbar_right_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/headbar_right_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/headbar_right_btn"
+                android:textColor="@color/head_bar_txt" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
