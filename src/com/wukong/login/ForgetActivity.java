@@ -165,7 +165,7 @@ public class ForgetActivity extends Activity implements OnClickListener {
 			}
 		};
 		WKHttpClient client = new WKHttpClient();
-		client.doHttpForget(username, password, res);
+		client.doHttpForgetbytel(username, password, res);
 	}
 
 }

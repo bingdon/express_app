@@ -35,6 +35,8 @@ public class PersonInfoBean implements Serializable {
 	private String picFileContentType;
 	
 	private String password;
+	
+	private String ide;
 
 	public String getId() {
 		return ""+id;
@@ -140,6 +142,12 @@ public class PersonInfoBean implements Serializable {
 		this.password = password;
 	}
 	
+	public String getIde() {
+		return ide;
+	}
 	
+	public void setIde(String ide) {
+		this.ide = ide;
+	}
 	
 }

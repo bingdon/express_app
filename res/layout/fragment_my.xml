@@ -39,7 +39,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="25dp"
                 android:layout_toRightOf="@+id/my_headview"
-                android:text="冲桑爱塔兔"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
@@ -115,17 +115,11 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@+id/imageView1"
+                android:gravity="center"
                 android:text="我的线路"
+                android:drawableLeft="@drawable/my_icon3"
                 android:textSize="18sp" />
 
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/my_icon3" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -147,17 +141,11 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@+id/imageView1"
                 android:text="我的资料"
+                android:drawableLeft="@drawable/my_icon4"
+                android:gravity="center"
                 android:textSize="18sp" />
 
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/my_icon4" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -179,17 +167,11 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@+id/imageView1"
                 android:text="充值提现"
+                android:gravity="center"
+                android:drawableLeft="@drawable/my_icon5"
                 android:textSize="18sp" />
 
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/my_icon5" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -211,17 +193,11 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@+id/imageView1"
                 android:text="化身悟空，成为帮递员"
+                android:gravity="center"
+                android:drawableLeft="@drawable/my_icon6"
                 android:textSize="18sp" />
 
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/my_icon6" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -243,17 +219,11 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@+id/imageView1"
                 android:text="常用地址"
+                android:gravity="center"
+                android:drawableLeft="@drawable/my_icon7"
                 android:textSize="18sp" />
 
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/my_icon7" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -275,17 +245,11 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@+id/imageView1"
+                android:gravity="center"
+                android:drawableLeft="@drawable/my_icon8"
                 android:text="分享给朋友拿奖励"
                 android:textSize="18sp" />
 
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/my_icon8" />
         </RelativeLayout>
     </RelativeLayout>
 

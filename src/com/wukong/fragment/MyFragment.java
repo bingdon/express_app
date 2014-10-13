@@ -19,6 +19,8 @@ import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.wukong.R;
+import com.wukong.WKApplication;
+import com.wukong.bean.PersonInfoBean;
 import com.wukong.data.AddressModel;
 import com.wukong.login.LoginActivity;
 import com.wukong.my.MyAddressActivity;
@@ -122,8 +124,20 @@ public class MyFragment extends Fragment implements OnClickListener {
 		my_address.setOnClickListener(this);
 		my_share.setOnClickListener(this);
 		GetUser(id);
+		initView();
 		return view;
 
+	}
+	
+	
+	private void initView(){
+		PersonInfoBean personInfoBean=WKApplication.getInstance().getPersonInfoBean();
+		if (personInfoBean==null) {
+			return;
+		}
+		
+		name.setText(personInfoBean.getUsername());
+		
 	}
 
 	private void GetUser(String id) {

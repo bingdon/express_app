@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -52,6 +53,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 	public static String id;
 	private String tel;
 	private String pwd;
+	private ProgressDialog progressDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 		utils = new UIUtils();
 		utils.hideSoftInput(LoginActivity.this);
 		initView();
+		setView();
 	}
 
 	/**
@@ -80,6 +83,9 @@ public class LoginActivity extends Activity implements OnClickListener {
 		password_clear.setOnClickListener(this);
 		login_sure.setOnClickListener(this);
 		find_password.setOnClickListener(this);
+		
+		progressDialog=new ProgressDialog(this);
+		progressDialog.setMessage(getString(R.string.login_ing));
 	}
 
 	@Override
@@ -151,6 +157,21 @@ public class LoginActivity extends Activity implements OnClickListener {
 	private void doLogin(String username, String password) {
 		// TODO Auto-generated method stub
 		AsyncHttpResponseHandler res = new AsyncHttpResponseHandler() {
+			
+			@Override
+			public void onStart() {
+				// TODO Auto-generated method stub
+				super.onStart();
+				progressDialog.show();
+			}
+			
+			@Override
+			public void onFinish() {
+				// TODO Auto-generated method stub
+				super.onFinish();
+				progressDialog.dismiss();
+			}
+			
 			@Override
 			public void onSuccess(String response) {
 				System.out.println(response);
@@ -194,6 +215,17 @@ public class LoginActivity extends Activity implements OnClickListener {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void setView(){
+		PersonInfoBean personInfoBean=WKApplication.getInstance().getPersonInfoBean();
+		if (personInfoBean==null) {
+			return;
+		}
+		
+		name.setText(personInfoBean.getTel());
+		password.setText(personInfoBean.getPassword());
+		
 	}
 
 }
