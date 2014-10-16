@@ -157,7 +157,7 @@ public class AddressDetailActivity extends Activity implements OnClickListener {
 			deleteAddress(id);
 			break;
 		case R.id.default_address_btn:// ÉèÖÃÄ¬ÈÏ¼ü
-
+			
 			break;
 		default:
 			break;

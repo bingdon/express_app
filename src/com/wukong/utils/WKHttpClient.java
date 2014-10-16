@@ -5,6 +5,7 @@ import android.util.Log;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.wukong.bean.OrderBean;
 import com.wukong.bean.PersonInfoBean;
 
 public class WKHttpClient {
@@ -12,6 +13,7 @@ public class WKHttpClient {
 	 * 公共地址
 	 */
 	public static final String BASE_URL = "http://115.28.165.94:8080/sun/api/";
+	public static final String URL = "http://115.28.165.94:8080/sun/";
 	public static final String sigin_url = BASE_URL + "postUser?username=";
 	public static final String sigin_url_ = BASE_URL + "postUser?tel=";
 	public static final String login_url = BASE_URL + "findUser?tel=";
@@ -32,8 +34,35 @@ public class WKHttpClient {
 	/**
 	 * 修改用户头像
 	 */
-	public static final String UPLOAD_HEADIMAGE_URL = BASE_URL + "uploadHeadimage";
+	public static final String UPLOAD_HEADIMAGE_URL = BASE_URL
+			+ "uploadHeadimage";
+	/**
+	 * 图片地址
+	 */
+	public static final String IMAGER_URL = URL + "upload";
+	/**
+	 * 订单查询地址
+	 */
+	public static final String SEARCH_ORDER = BASE_URL + "findMyOrder";
+	/**
+	 * 发布线路
+	 */
+	public static final String POST_ROUTE = BASE_URL + "postSchedule";
+	/**
+	 * 发件
+	 */
+	public static final String POST_GOODS = BASE_URL + "post";
+	/**
+	 * 货物类型
+	 */
+	public static final String LIST_GOODS_TYPE = BASE_URL + "list";
+
+	public static final String LIST_TO_DO_ORDER = BASE_URL + "secExpress";
+
 	private static AsyncHttpClient client = new AsyncHttpClient();
+	static {
+		client.setURLEncodingEnabled(true);
+	}
 
 	// 注册
 	public void doHttpForget(String username, String password,
@@ -158,17 +187,127 @@ public class WKHttpClient {
 		params.put("age", personInfoBean.getAge());
 		client.post(UPDATE_USER_URL, params, handler);
 	}
+
 	/**
 	 * 修改用户头像
+	 * 
 	 * @param id
 	 * @param headimage
 	 * @param handler
 	 */
-	public static void modifyUserHead(String id,String headimage,AsyncHttpResponseHandler handler){
-		RequestParams params=new RequestParams();
+	public static void modifyUserHead(String id, String headimage,
+			AsyncHttpResponseHandler handler) {
+		RequestParams params = new RequestParams();
 		params.put("headimage", headimage);
 		params.put("id", id);
 		client.post(UPLOAD_HEADIMAGE_URL, params, handler);
 	}
-	
+
+	/**
+	 * 订单查询
+	 * 
+	 * @param id
+	 * @param handler
+	 */
+	public static void findMyOrder(String id, AsyncHttpResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("did", id);
+		client.post(SEARCH_ORDER, params, handler);
+	}
+
+	/**
+	 * 发布行程
+	 * 
+	 * @param id
+	 *            发布ID
+	 * @param start
+	 *            起始位置
+	 * @param end
+	 *            发送终点
+	 * @param vehicle
+	 *            交通方式
+	 * @param trainnum
+	 *            车次
+	 * @param begintime
+	 *            开始时间
+	 * @param arrivetime
+	 *            到达时间
+	 * @param receiveway
+	 *            接收方式
+	 * @param getway
+	 *            获取方式
+	 * @param demand
+	 *            要求
+	 * @param handler
+	 *            处理返回
+	 */
+	public static void postSchedule(String id, String start, String end,
+			String vehicle, String trainnum, String begintime,
+			String arrivetime, String receiveway, String getway, String demand,
+			AsyncHttpResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("did", id);
+		params.put("start", start);
+		params.put("end", end);
+		params.put("vehicle", vehicle);
+		params.put("trainnum", trainnum);
+		params.put("begintime", begintime);
+		params.put("arrivetime", arrivetime);
+		params.put("receiveway", receiveway);
+		params.put("getway", getway);
+		params.put("demand", demand);
+		client.post(POST_ROUTE, params, handler);
+	}
+
+	/**
+	 * 发送快件
+	 * 
+	 * @param orderBean
+	 *            快件
+	 * @param handler
+	 *            返回处理
+	 */
+	public static void postGoods(OrderBean orderBean,
+			AsyncHttpResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("id", orderBean.getId());
+		params.put("uid", orderBean.getUid());
+		params.put("shipper", orderBean.getShipper());
+		params.put("s_tel", orderBean.getS_tel());
+		params.put("s_address", orderBean.getS_address());
+		params.put("receiver", orderBean.getReceiver());
+		params.put("r_tel", orderBean.getR_tel());
+		params.put("r_address", orderBean.getR_address());
+		params.put("way", orderBean.getWay());
+		params.put("category", orderBean.getCategory());
+		params.put("gname", orderBean.getGname());
+		params.put("weight", orderBean.getWeight());
+		params.put("price", orderBean.getPrice());
+		params.put("remarks", orderBean.getRemarks());
+		params.put("cost", orderBean.getCost());
+		params.put("tag", orderBean.getTag());
+		client.post(POST_GOODS, params, handler);
+	}
+
+	/**
+	 * 获取货物类型
+	 * 
+	 * @param handler
+	 */
+	public static void listGoodsType(AsyncHttpResponseHandler handler) {
+		client.post(LIST_GOODS_TYPE, handler);
+	}
+
+	/**
+	 * 查询等待订单
+	 * 
+	 * @param tag
+	 * @param handler
+	 */
+	public static void secExpress(String tag, AsyncHttpResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("tag", tag);
+		client.post(LIST_TO_DO_ORDER, params,handler);
+	}
+
 }

@@ -3,6 +3,10 @@ package com.wukong.data;
 import java.io.Serializable;
 
 public class GoodsModel implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7246005548264069289L;
 	private String uid;// 商品id
 	private String shipper;// 发货人
 	private String s_tel;// 发货人电话

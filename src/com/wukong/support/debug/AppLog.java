@@ -1,4 +1,4 @@
-package com.wukong.debug;
+package com.wukong.support.debug;
 
 import com.wukong.BuildConfig;
 

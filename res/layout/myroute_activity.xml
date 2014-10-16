@@ -52,15 +52,17 @@
                     android:layout_alignParentRight="true"
                     android:background="@drawable/input_line" />
 
-                <TextView
+                <EditText
                     android:id="@+id/route_from_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/textView2"
-                    android:layout_alignBottom="@+id/textView2"
+                    android:layout_alignParentBottom="false"
+                    android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/imageView5"
-                    android:text="北京"
+                    android:background="@color/transparent"
+                    android:hint="例如北京"
                     android:textSize="18sp" />
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -137,15 +139,16 @@
                     android:layout_marginRight="5dp"
                     android:background="@drawable/actionbar_gprs" />
 
-                <TextView
+                <EditText
                     android:id="@+id/route_to_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/textView4"
-                    android:layout_alignBottom="@+id/textView4"
+                    android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/imageView7"
-                    android:text="北京"
+                    android:background="@color/transparent"
+                    android:hint="例如北京"
                     android:textSize="18sp" />
+
             </RelativeLayout>
 
             <RelativeLayout

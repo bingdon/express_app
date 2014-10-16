@@ -50,8 +50,7 @@
             <ImageView
                 android:id="@+id/headbar_right_btn"
                 android:layout_width="30dp"
-                android:layout_height="30dp" 
-                android:clickable="true"/>
+                android:layout_height="30dp" />
 
             <TextView
                 android:id="@+id/headbar_right_txt"

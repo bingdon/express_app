@@ -1,5 +1,7 @@
 package com.wukong.adapter;
 
+import java.util.List;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wukong.R;
+import com.wukong.bean.OrderBean;
 
 public class RouteAdapter extends BaseAdapter {
 	private Context mContext;
+
+	private List<OrderBean> list;
 
 	/******* 构造函数 *******/
 	public RouteAdapter(Context context) {
@@ -19,22 +24,28 @@ public class RouteAdapter extends BaseAdapter {
 		this.mContext = context;
 	}
 
+	public RouteAdapter(Context context, List<OrderBean> list) {
+		// Log.d(TAG, "GoodsAdapter");
+		this.mContext = context;
+		this.list = list;
+	}
+
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return 4;
+		return list.size();
 	}
 
 	@Override
 	public Object getItem(int arg0) {
 		// TODO Auto-generated method stub
-		return null;
+		return list.get(arg0);
 	}
 
 	@Override
 	public long getItemId(int arg0) {
 		// TODO Auto-generated method stub
-		return 0;
+		return arg0;
 	}
 
 	@Override
@@ -60,6 +71,13 @@ public class RouteAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) arg1.getTag();
 		}
+		OrderBean orderBean = list.get(arg0);
+		holder.route_name.setText("发件人:" + orderBean.getShipper());
+		holder.route_from_to.setText("线路:" + orderBean.getS_address() + "-"
+				+ orderBean.getR_address());
+		holder.route_info.setText("物品信息:"+orderBean.getGname() + ","
+				+ orderBean.getWeight());
+		holder.route_tel.setText("联系电话:" + orderBean.getS_tel());
 		return arg1;
 	}
 

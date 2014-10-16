@@ -1,5 +1,6 @@
 package com.wukong.login;
 
+import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,19 +19,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.wukong.CheifActivity;
 import com.wukong.R;
 import com.wukong.WKApplication;
 import com.wukong.bean.PersonInfoBean;
-import com.wukong.debug.AppLog;
 import com.wukong.httpUtils.GsonUtlity;
+import com.wukong.support.debug.AppLog;
 import com.wukong.utils.ToastUtils;
 import com.wukong.utils.UIUtils;
 import com.wukong.utils.WKHttpClient;
 
 /**
  * 
- * @ClassName: WelcomeActivity
+ * @ClassName: LoginActivity
  * @Description:µÇÂ¼Ò³
  * @Author: zc
  * @CreateDate:
@@ -156,7 +158,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 	private void doLogin(String username, String password) {
 		// TODO Auto-generated method stub
-		AsyncHttpResponseHandler res = new AsyncHttpResponseHandler() {
+		JsonHttpResponseHandler res = new JsonHttpResponseHandler() {
 			
 			@Override
 			public void onStart() {
@@ -172,13 +174,17 @@ public class LoginActivity extends Activity implements OnClickListener {
 				progressDialog.dismiss();
 			}
 			
+			
 			@Override
-			public void onSuccess(String response) {
-				System.out.println(response);
-				parseUser(response);
+			public void onSuccess(int statusCode, Header[] headers,
+					JSONObject response) {
+				// TODO Auto-generated method stub
+				super.onSuccess(statusCode, headers, response);
+				System.out.println(""+response);
+				parseUser(""+response);
 				// TODO Auto-generated method stub
 				try {
-					JSONObject obj = new JSONObject(response);
+					JSONObject obj = new JSONObject(""+response);
 					if (obj.getInt("result") == 1) {
 						ToastUtils.showShort(getApplicationContext(), "µÇÂ¼³É¹¦£¡");
 						Intent intent = new Intent(LoginActivity.this,
@@ -191,6 +197,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 					e.printStackTrace();
 				}
 			}
+			
 		};
 		WKHttpClient client = new WKHttpClient();
 		client.doHttpLogin(username, password, res);

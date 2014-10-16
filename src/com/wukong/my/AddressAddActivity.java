@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.wukong.R;
+import com.wukong.WKApplication;
 import com.wukong.login.LoginActivity;
 import com.wukong.utils.ToastUtils;
 import com.wukong.utils.WKHttpClient;
@@ -42,7 +43,7 @@ public class AddressAddActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.addaddress_activity);
-		id = LoginActivity.id;
+		id = WKApplication.getInstance().getPersonInfoBean().getId();
 		InitView();
 	}
 

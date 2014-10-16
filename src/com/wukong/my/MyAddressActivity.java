@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.wukong.R;
+import com.wukong.WKApplication;
 import com.wukong.adapter.MyAddressAdapter;
 import com.wukong.data.AddressModel;
 import com.wukong.login.LoginActivity;
@@ -52,7 +53,7 @@ public class MyAddressActivity extends Activity implements OnClickListener,
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.myaddress_activity);
 		addressItem = new ArrayList<AddressModel>();
-		id = LoginActivity.id;
+		id = WKApplication.getInstance().getPersonInfoBean().getId();
 		getAddress(id);
 	}
 

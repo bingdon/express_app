@@ -9,6 +9,7 @@ import android.os.Message;
 import android.view.Window;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.wukong.bean.PersonInfoBean;
 import com.wukong.login.LoginActivity;
 import com.wukong.utils.UserInfoUtility;
@@ -91,7 +92,7 @@ public class WelcomeActivity extends Activity implements Callback {
 		}
 
 		new WKHttpClient().doHttpLogin(personInfoBean.getTel(),
-				personInfoBean.getPassword(), new AsyncHttpResponseHandler());
+				personInfoBean.getPassword(), new JsonHttpResponseHandler());
 	}
 
 }

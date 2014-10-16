@@ -6,8 +6,7 @@
     <RelativeLayout
         android:id="@+id/route_layout"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="@color/white" >
+        android:layout_height="150dp" >
 
         <ImageView
             android:id="@+id/route_myhead"
@@ -38,8 +37,11 @@
             android:layout_alignLeft="@+id/route_receive_name"
             android:layout_below="@+id/route_receive_name"
             android:layout_marginTop="10dp"
+            android:ellipsize="middle"
+            android:singleLine="true"
             android:text="线路：北京-上海"
             android:textColor="@color/gray"
+            android:maxWidth="140dp"
             android:textSize="14sp" />
 
         <TextView
@@ -48,8 +50,11 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/route_from_to"
             android:layout_below="@+id/route_from_to"
+            android:ellipsize="middle"
+            android:singleLine="true"
             android:text="时间：2014-09-10"
             android:textColor="@color/gray"
+            android:maxWidth="140dp"
             android:textSize="14sp" />
 
         <TextView

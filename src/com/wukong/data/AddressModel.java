@@ -3,6 +3,10 @@ package com.wukong.data;
 import java.io.Serializable;
 
 public class AddressModel implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8432337579228444535L;
 	private String id;// 地址id
 	private String reciver;// 收件人
 	private String tel;// 电话
