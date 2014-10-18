@@ -5,6 +5,7 @@ import java.util.List;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -12,11 +13,19 @@ import android.widget.TextView;
 
 import com.wukong.R;
 import com.wukong.bean.OrderBean;
+import com.wukong.support.image.LoadImageUtility;
+import com.wukong.utils.WKHttpClient;
 
 public class RouteAdapter extends BaseAdapter {
 	private Context mContext;
 
 	private List<OrderBean> list;
+	
+	private RoutGetListener listener;
+	
+	public void setListener(RoutGetListener listener) {
+		this.listener = listener;
+	}
 
 	/******* 构造函数 *******/
 	public RouteAdapter(Context context) {
@@ -67,6 +76,7 @@ public class RouteAdapter extends BaseAdapter {
 			holder.route_info = (TextView) arg1
 					.findViewById(R.id.route_goodsinfo);// 信息
 			holder.route_tel = (TextView) arg1.findViewById(R.id.route_tel);// 电话
+			holder.getOrder=(ImageView)arg1.findViewById(R.id.get_order);
 			arg1.setTag(holder);// 绑定ViewHolder对象
 		} else {
 			holder = (ViewHolder) arg1.getTag();
@@ -75,9 +85,23 @@ public class RouteAdapter extends BaseAdapter {
 		holder.route_name.setText("发件人:" + orderBean.getShipper());
 		holder.route_from_to.setText("线路:" + orderBean.getS_address() + "-"
 				+ orderBean.getR_address());
-		holder.route_info.setText("物品信息:"+orderBean.getGname() + ","
+		holder.route_info.setText("物品信息:" + orderBean.getGname() + ","
 				+ orderBean.getWeight());
 		holder.route_tel.setText("联系电话:" + orderBean.getS_tel());
+		LoadImageUtility.displayWebImage(
+				WKHttpClient.IMAGER_URL + orderBean.getHeadimage(),
+				holder.route_head);
+		final int position=arg0;
+		holder.getOrder.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if (listener!=null) {
+					listener.getOrder(position);
+				}
+			}
+		});
 		return arg1;
 	}
 
@@ -89,6 +113,12 @@ public class RouteAdapter extends BaseAdapter {
 		public TextView route_time;
 		public TextView route_info;
 		public TextView route_tel;
+		public ImageView getOrder;
 
 	}
+	
+	public interface RoutGetListener{
+		public void getOrder(int position);
+	}
+	
 }

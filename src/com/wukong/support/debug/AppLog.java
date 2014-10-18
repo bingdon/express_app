@@ -7,6 +7,8 @@ import android.util.Log;
 
 public class AppLog {
 
+	private static final String TAG="Wkong";
+	
 	public static void i(String tag, String msg) {
 		if (BuildConfig.DEBUG) {
 			Log.i(tag, msg);
@@ -37,4 +39,10 @@ public class AppLog {
 		}
 	}
 
+	public static void i(String msg) {
+		if (BuildConfig.DEBUG) {
+			Log.i(TAG, msg);
+		}
+	}
+	
 }

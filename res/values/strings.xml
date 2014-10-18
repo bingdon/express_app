@@ -35,5 +35,11 @@
     <string name="receiver_notice">请填写收货人姓名</string>
     <string name="receiver_phone_notice">请填写收货人电话</string>
     <string name="receiver_address_notice">请填写收货地址</string>
+    <string name="get_order_u">您已成功抢到订单</string>
+    <string name="get_order_m0">请尽快与发件人联系或您\n拨打发货人电话</string>
+    <string name="get_order_m1">询问取货时间</string>
+    <string name="get_order_success">抢单成功</string>
+    <string name="back">返回</string>
+     <string name="delete">删除</string>
 
 </resources>

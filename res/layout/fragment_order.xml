@@ -71,12 +71,19 @@
                 android:textSize="15sp" />
         </RelativeLayout>
 
-        <ListView
-            android:id="@+id/order_listview"
-            android:layout_width="wrap_content"
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+           android:id="@+id/order_listview"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/order_content_layout" >
-        </ListView>
+            android:layout_below="@+id/order_content_layout"
+            android:divider="@color/transparent"
+            android:fadingEdge="none"
+            android:fastScrollEnabled="false"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false"
+            >
+        </com.handmark.pulltorefresh.library.PullToRefreshListView>
+
     </RelativeLayout>
 
 </RelativeLayout>

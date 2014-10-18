@@ -7,13 +7,13 @@
         android:id="@+id/route_headbar"
         layout="@layout/headbar_view" />
 
-    <ListView
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/route_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/route_headbar"
         android:background="@color/white"
         android:divider="#00000000" >
-    </ListView>
+    </com.handmark.pulltorefresh.library.PullToRefreshListView>
 
 </RelativeLayout>

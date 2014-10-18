@@ -159,6 +159,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppBaseTheme" >
         </activity>
+        <activity android:name=".main.GetOrderSuccessActivity" android:theme="@style/AppBaseTheme"></activity>
     </application>
 
 </manifest>

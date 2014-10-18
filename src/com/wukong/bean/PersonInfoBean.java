@@ -38,6 +38,16 @@ public class PersonInfoBean implements Serializable {
 	
 	private String ide;
 
+	private int type;
+	
+	public void setType(int type) {
+		this.type = type;
+	}
+	
+	public int getType() {
+		return type;
+	}
+	
 	public String getId() {
 		return ""+id;
 	}

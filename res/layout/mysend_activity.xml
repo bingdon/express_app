@@ -131,6 +131,7 @@
                     android:hint="输入重量"
                     android:paddingRight="30dp"
                     android:singleLine="true"
+                    android:inputType="number"
                     android:textSize="18sp" />
             </RelativeLayout>
 
@@ -159,6 +160,7 @@
                     android:background="@color/transparent"
                     android:hint="@string/cost_notice"
                     android:singleLine="true"
+                     android:inputType="number"
                     android:textSize="18sp" />
 
                 <ImageView
@@ -305,12 +307,13 @@
                     android:gravity="center|right"
                     android:hint="发货人电话"
                     android:singleLine="true"
+                     android:inputType="number"
                     android:textSize="18sp" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/mysend_sendaddress"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@color/white" >
 
@@ -323,13 +326,15 @@
                     android:text="发货地址"
                     android:textSize="18sp" />
 
-                <TextView
+                <EditText 
                     android:id="@+id/send_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="35dp"
+                    android:hint="@string/sender_address_notice"
+                    android:background="@color/transparent"
                     android:textSize="18sp" />
 
                 <ImageView
@@ -434,12 +439,13 @@
                     android:gravity="center|right"
                     android:hint="收货人电话"
                     android:singleLine="true"
+                     android:inputType="number"
                     android:textSize="18sp" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/mysend_receiveaddress"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@color/white" >
 
@@ -452,13 +458,15 @@
                     android:text="收货地址"
                     android:textSize="18sp" />
 
-                <TextView
+                <EditText 
                     android:id="@+id/receive_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="35dp"
+                    android:background="@color/transparent"
+                    android:hint="@string/receiver_address_notice"
                     android:textSize="18sp" />
 
                 <ImageView

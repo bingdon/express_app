@@ -8,6 +8,7 @@ public class OrderBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -2352050860725815464L;
+
 	private String id;
 
 	private String uid;
@@ -47,121 +48,200 @@ public class OrderBean implements Serializable {
 	private String lon;
 	// Î³¶È
 	private String lat;
+
+	private String headimage;
+
+	private String createtime;
+	
+	private int status;
+	
+	public int getStatus() {
+		return status;
+	}
+	
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public void setCreatetime(String createtime) {
+		this.createtime = createtime;
+	}
+
+	public String getCreatetime() {
+		return "" + createtime;
+	}
+
+	public String getHeadimage() {
+		return headimage;
+	}
+
+	public void setHeadimage(String headimage) {
+		this.headimage = headimage;
+	}
+
 	public String getId() {
 		return id;
 	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
+
 	public String getUid() {
 		return uid;
 	}
+
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
+
 	public String getCategory() {
 		return category;
 	}
+
 	public void setCategory(String category) {
 		this.category = category;
 	}
+
 	public String getGname() {
 		return gname;
 	}
+
 	public void setGname(String gname) {
 		this.gname = gname;
 	}
+
 	public String getWeight() {
 		return weight;
 	}
+
 	public void setWeight(String weight) {
 		this.weight = weight;
 	}
+
 	public String getPrice() {
 		return price;
 	}
+
 	public void setPrice(String price) {
 		this.price = price;
 	}
+
 	public String getRemarks() {
 		return remarks;
 	}
+
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
+
 	public String getCost() {
 		return cost;
 	}
+
 	public void setCost(String cost) {
 		this.cost = cost;
 	}
+
 	public String getTag() {
 		return tag;
 	}
+
 	public void setTag(String tag) {
 		this.tag = tag;
 	}
+
 	public String getShipper() {
 		return shipper;
 	}
+
 	public void setShipper(String shipper) {
 		this.shipper = shipper;
 	}
+
 	public String getS_tel() {
 		return s_tel;
 	}
+
 	public void setS_tel(String s_tel) {
 		this.s_tel = s_tel;
 	}
+
 	public String getS_address() {
 		return s_address;
 	}
+
 	public void setS_address(String s_address) {
 		this.s_address = s_address;
 	}
+
 	public String getReceiver() {
 		return receiver;
 	}
+
 	public void setReceiver(String receiver) {
 		this.receiver = receiver;
 	}
+
 	public String getR_tel() {
 		return r_tel;
 	}
+
 	public void setR_tel(String r_tel) {
 		this.r_tel = r_tel;
 	}
+
 	public String getR_address() {
 		return r_address;
 	}
+
 	public void setR_address(String r_address) {
 		this.r_address = r_address;
 	}
+
 	public String getWay() {
 		return way;
 	}
+
 	public void setWay(String way) {
 		this.way = way;
 	}
+
 	public String getStarttime() {
-		return starttime;
+		return ""+starttime;
 	}
+
 	public void setStarttime(String starttime) {
 		this.starttime = starttime;
 	}
+
 	public String getLon() {
 		return lon;
 	}
+
 	public void setLon(String lon) {
 		this.lon = lon;
 	}
+
 	public String getLat() {
 		return lat;
 	}
+
 	public void setLat(String lat) {
 		this.lat = lat;
 	}
-	
-	
-	
+
+	@Override
+	public boolean equals(Object o) {
+		// TODO Auto-generated method stub
+		OrderBean orderBean = (OrderBean) o;
+		boolean a = this.getCreatetime().equals(orderBean.getCreatetime());
+		boolean b = this.getShipper().equals(orderBean.getShipper());
+		boolean c = this.getId().equals(orderBean.getId());
+		if (a && b && c) {
+			return true;
+		}
+		return false;
+	}
+
 }

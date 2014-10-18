@@ -56,6 +56,7 @@ public class MyDataActivity extends Activity implements OnClickListener {
 	private TextView usernameTextView;
 	private TextView ageTextView;
 	private TextView gendarTextView;
+	private TextView data_timeTextView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,7 @@ public class MyDataActivity extends Activity implements OnClickListener {
 		ageTextView = (TextView) findViewById(R.id.data_age);
 		gendarTextView = (TextView) findViewById(R.id.data_sex);
 		submit = (ImageView) findViewById(R.id.headbar_right_btn);
+		data_timeTextView=(TextView)findViewById(R.id.data_time);
 		submit.setImageResource(R.drawable.submit_sec);
 		findViewById(R.id.headbar_right_layout).setVisibility(View.VISIBLE);
 		head_txt.setText("我的资料");
@@ -141,6 +143,8 @@ public class MyDataActivity extends Activity implements OnClickListener {
 		} else {
 			gendarTextView.setText(R.string.woman);
 		}
+		
+		data_timeTextView.setText(personInfoBean.getCreatetime());
 
 		LoadImageUtility.displayWebImage(WKHttpClient.IMAGER_URL
 				+ personInfoBean.getHeadimage(), headImageView);
@@ -355,8 +359,9 @@ public class MyDataActivity extends Activity implements OnClickListener {
 							public void onClick(DialogInterface dialog,
 									int which) {
 								// TODO Auto-generated method stub
-								age = ageEditText.getText().toString();
-								if (!TextUtils.isEmpty(age)) {
+								String age_ = ageEditText.getText().toString();
+								if (!TextUtils.isEmpty(age_)) {
+									age=age_;
 									ageTextView.setText(age);
 								}
 							}
@@ -376,8 +381,9 @@ public class MyDataActivity extends Activity implements OnClickListener {
 							public void onClick(DialogInterface dialog,
 									int which) {
 								// TODO Auto-generated method stub
-								username = nameEditText.getText().toString();
-								if (!TextUtils.isEmpty(username)) {
+								String  username_ = nameEditText.getText().toString();
+								if (!TextUtils.isEmpty(username_)) {
+									username=username_;
 									usernameTextView.setText(username);
 								}
 

@@ -1,16 +1,18 @@
 package com.wukong.support.notice;
 
+import org.apache.http.Header;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.content.Context;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 public abstract class HandlerJson extends JsonHttpResponseHandler {
-	private Context context;
+	private Activity context;
 	private String message;
 	private int id;
-	public HandlerJson(Context context,String message,int id){
+	public HandlerJson(Activity context,String message,int id){
 		this.context=context;
 		this.message=message;
 		this.id=id;
@@ -21,13 +23,13 @@ public abstract class HandlerJson extends JsonHttpResponseHandler {
 		// TODO Auto-generated method stub
 		super.onStart();
 		NoticeUtils.notice(context, message, id);
+		context.finish();
 	}
 	
-	
 	@Override
-	public void onFailure(Throwable e, JSONObject errorResponse) {
+	public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
 		// TODO Auto-generated method stub
-		super.onFailure(e, errorResponse);
+		super.onFailure(arg0, arg1, arg2, arg3);
 		NoticeUtils.removeNotice(id, context);
 		NoticeUtils.showFailePublish(context);
 	}

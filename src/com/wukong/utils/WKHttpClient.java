@@ -7,6 +7,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.wukong.bean.OrderBean;
 import com.wukong.bean.PersonInfoBean;
+import com.wukong.support.debug.AppLog;
 
 public class WKHttpClient {
 	/**
@@ -41,9 +42,17 @@ public class WKHttpClient {
 	 */
 	public static final String IMAGER_URL = URL + "upload";
 	/**
-	 * 订单查询地址
+	 * @deprecated 订单查询地址
 	 */
 	public static final String SEARCH_ORDER = BASE_URL + "findMyOrder";
+	/**
+	 * @deprecated 订单查询地址
+	 */
+	public static final String LIST_ORDER = BASE_URL + "findExpOrder";
+	/**
+	 * 订单查询地址
+	 */
+	public static final String LIST_MY_ORDER = BASE_URL + "myExpress";
 	/**
 	 * 发布线路
 	 */
@@ -56,13 +65,30 @@ public class WKHttpClient {
 	 * 货物类型
 	 */
 	public static final String LIST_GOODS_TYPE = BASE_URL + "list";
-
+	/**
+	 * 卫未生成订单
+	 */
 	public static final String LIST_TO_DO_ORDER = BASE_URL + "secExpress";
+	/**
+	 * 查询我的订单
+	 */
+	public static final String FIND_MY_Order_ORDER = BASE_URL + "findMyOrder";
+	/**
+	 * 获取订单
+	 */
+	public static final String GET_ORDER = BASE_URL + "postTrade";
+	/**
+	 * 跟踪快件
+	 */
+	public static final String GET_TRADER_ORDER = BASE_URL + "findByDid";
+
+	public static final String DEL_ORDER = BASE_URL + "deleteExp";
 
 	private static AsyncHttpClient client = new AsyncHttpClient();
-	static {
-		client.setURLEncodingEnabled(true);
-	}
+
+	// static {
+	// client.setURLEncodingEnabled(true);
+	// }
 
 	// 注册
 	public void doHttpForget(String username, String password,
@@ -206,6 +232,7 @@ public class WKHttpClient {
 	/**
 	 * 订单查询
 	 * 
+	 * @deprecated
 	 * @param id
 	 * @param handler
 	 */
@@ -270,7 +297,7 @@ public class WKHttpClient {
 	public static void postGoods(OrderBean orderBean,
 			AsyncHttpResponseHandler handler) {
 		RequestParams params = new RequestParams();
-		params.put("id", orderBean.getId());
+		// params.put("id", orderBean.getId());
 		params.put("uid", orderBean.getUid());
 		params.put("shipper", orderBean.getShipper());
 		params.put("s_tel", orderBean.getS_tel());
@@ -287,6 +314,7 @@ public class WKHttpClient {
 		params.put("cost", orderBean.getCost());
 		params.put("tag", orderBean.getTag());
 		client.post(POST_GOODS, params, handler);
+		AppLog.i(POST_GOODS + "?" + params);
 	}
 
 	/**
@@ -307,7 +335,71 @@ public class WKHttpClient {
 	public static void secExpress(String tag, AsyncHttpResponseHandler handler) {
 		RequestParams params = new RequestParams();
 		params.put("tag", tag);
-		client.post(LIST_TO_DO_ORDER, params,handler);
+		client.post(LIST_TO_DO_ORDER, params, handler);
 	}
 
+	/**
+	 * 查询订单
+	 * 
+	 * @deprecated
+	 * @param id
+	 * @param handler
+	 */
+	public static void findExpOrder(String id, AsyncHttpResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("eid", id);
+		client.post(LIST_ORDER, params, handler);
+	}
+
+	/**
+	 * 查询订单
+	 * 
+	 * @param uid
+	 * @param handler
+	 */
+	public static void findmyExpress(String uid,
+			AsyncHttpResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("uid", uid);
+		client.post(LIST_MY_ORDER, params, handler);
+	}
+
+	/**
+	 * 抢订单
+	 * 
+	 * @param ide
+	 * @param orid
+	 * @param handler
+	 */
+	public static void postTrade(String ide, String orid,
+			AsyncHttpResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("did", ide);
+		params.put("eid", orid);
+		client.post(GET_ORDER, params, handler);
+	}
+
+	/**
+	 * 跟踪快件
+	 * 
+	 * @param id
+	 * @param handler
+	 */
+	public static void findByDid(String id, AsyncHttpResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("id", id);
+		client.post(GET_TRADER_ORDER, params, handler);
+	}
+
+	/**
+	 * 删除订单
+	 * 
+	 * @param id
+	 * @param handler
+	 */
+	public static void deleteExp(String id, AsyncHttpResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("id", id);
+		client.post(DEL_ORDER, params, handler);
+	}
 }

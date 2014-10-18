@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.wukong.R;
 import com.wukong.WKApplication;
 import com.wukong.bean.OrderBean;
@@ -49,12 +48,12 @@ public class SendActivity extends Activity implements OnClickListener {
 	private EditText sendname;// 发货人姓名
 	private EditText sendtel;// 发货人电话
 	private RelativeLayout sendaddress_layout;
-	private TextView sendaddress;// 发货人地址
+	private EditText sendaddress;// 发货人地址
 	/************* 收货人 **************/
 	private EditText recivename;// 收货人姓名
 	private EditText recivetel;// 收货人电话
 	private RelativeLayout reciveaddress_layout;
-	private TextView reciveaddress;// 收货人地址
+	private EditText reciveaddress;// 收货人地址
 
 	private Button submit;// 提交
 
@@ -98,11 +97,11 @@ public class SendActivity extends Activity implements OnClickListener {
 		sendname = (EditText) findViewById(R.id.send_name);
 		sendtel = (EditText) findViewById(R.id.send_tel);
 		sendaddress_layout = (RelativeLayout) findViewById(R.id.mysend_sendaddress);
-		sendaddress = (TextView) findViewById(R.id.send_address);
+		sendaddress = (EditText) findViewById(R.id.send_address);
 		recivename = (EditText) findViewById(R.id.receive_name);
 		recivetel = (EditText) findViewById(R.id.receive_tel);
 		reciveaddress_layout = (RelativeLayout) findViewById(R.id.mysend_receiveaddress);
-		reciveaddress = (TextView) findViewById(R.id.receive_address);
+		reciveaddress = (EditText) findViewById(R.id.receive_address);
 		submit = (Button) findViewById(R.id.mysend_submit);
 
 		type_layout.setOnClickListener(this);
@@ -174,6 +173,8 @@ public class SendActivity extends Activity implements OnClickListener {
 	private void publishGoods() {
 		OrderBean orderBean = new OrderBean();
 		orderBean.setUid(WKApplication.getInstance().getPersonInfoBean().getId());
+		ToastUtils.showLong(context, "ID:"+WKApplication.getInstance().getPersonInfoBean().getId());
+		orderBean.setTag("e1");
 		String category = type.getText().toString();
 		if (TextUtils.isEmpty(category)) {
 			type_layout.startAnimation(AnimationUtils.loadAnimation(context,
@@ -256,7 +257,7 @@ public class SendActivity extends Activity implements OnClickListener {
 			return;
 		}
 		orderBean.setR_address(r_address);
-		WKHttpClient.postGoods(orderBean, new HandlerJson(context,
+		WKHttpClient.postGoods(orderBean, new HandlerJson(SendActivity.this,
 				getString(R.string.publish_goods), 1) {
 
 			@Override
