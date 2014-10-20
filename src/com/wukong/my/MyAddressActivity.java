@@ -46,6 +46,8 @@ public class MyAddressActivity extends Activity implements OnClickListener,
 	private String id;
 	private ArrayList<AddressModel> addressItem;
 
+	private boolean isGetAddress = false;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -59,6 +61,8 @@ public class MyAddressActivity extends Activity implements OnClickListener,
 
 	private void getAddress(String id) {
 		// TODO Auto-generated method stub
+
+		isGetAddress = getIntent().getBooleanExtra("getaddress", false);
 		AsyncHttpResponseHandler res = new AsyncHttpResponseHandler() {
 			@Override
 			public void onSuccess(String response) {
@@ -146,11 +150,19 @@ public class MyAddressActivity extends Activity implements OnClickListener,
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		// TODO Auto-generated method stub
-		Intent intent = new Intent(MyAddressActivity.this,
-				AddressDetailActivity.class);
-		intent.putExtra("id", addressItem.get(arg2).getId());
-		startActivityForResult(intent,
-				Constants.START_ACTIVITY.ADDRESS_TO_ADDRESSDETAIL);
+		if (isGetAddress) {
+			Intent intent = new Intent();
+			intent.putExtra("address", addressItem.get(arg2));
+			setResult(RESULT_OK, intent);
+			finish();
+		} else {
+			Intent intent = new Intent(MyAddressActivity.this,
+					AddressDetailActivity.class);
+			intent.putExtra("id", addressItem.get(arg2).getId());
+			startActivityForResult(intent,
+					Constants.START_ACTIVITY.ADDRESS_TO_ADDRESSDETAIL);
+		}
+
 	}
 
 	@Override

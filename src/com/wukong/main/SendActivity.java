@@ -20,7 +20,9 @@ import android.widget.TextView;
 import com.wukong.R;
 import com.wukong.WKApplication;
 import com.wukong.bean.OrderBean;
+import com.wukong.data.AddressModel;
 import com.wukong.data.GoodsModel;
+import com.wukong.my.MyAddressActivity;
 import com.wukong.support.debug.AppLog;
 import com.wukong.support.notice.HandlerJson;
 import com.wukong.support.notice.NoticeUtils;
@@ -59,6 +61,8 @@ public class SendActivity extends Activity implements OnClickListener {
 
 	private GoodsModel goodsmodel;// 商品数据
 	private Context context;
+	private final int START_ADDRESS = 3;
+	private final int END_ADDRESS = 4;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -110,27 +114,34 @@ public class SendActivity extends Activity implements OnClickListener {
 		sendaddress_layout.setOnClickListener(this);
 		reciveaddress_layout.setOnClickListener(this);
 		submit.setOnClickListener(this);
+
 	}
 
-	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		if (resultCode!=RESULT_OK) {
+		if (resultCode != RESULT_OK) {
 			return;
 		}
-		
-		if (requestCode==Constants.START_ACTIVITY.SEND_TO_TYPE) {
-			String type=data.getStringExtra("name");
+
+		if (requestCode == Constants.START_ACTIVITY.SEND_TO_TYPE) {
+			String type = data.getStringExtra("name");
 			if (!TextUtils.isEmpty(type)) {
 				this.type.setText(type);
 			}
+		} else if (requestCode == START_ADDRESS) {
+			AddressModel addressModel = (AddressModel) data
+					.getSerializableExtra("address");
+			sendaddress.setText(addressModel.getDetail());
+		} else if (requestCode == END_ADDRESS) {
+			AddressModel addressModel = (AddressModel) data
+					.getSerializableExtra("address");
+			reciveaddress.setText(addressModel.getDetail());
 		}
-		
-		
+
 	}
-	
+
 	@Override
 	public void onClick(View arg0) {
 		// TODO Auto-generated method stub
@@ -155,12 +166,14 @@ public class SendActivity extends Activity implements OnClickListener {
 			// SendAddressActivity.class);
 			// startActivityForResult(sendaddressintent,
 			// Constants.START_ACTIVITY.SEND_TO_SENDADDRESS);
+			getAddress(START_ADDRESS);
 			break;
 		case R.id.mysend_receiveaddress:// 收货地址
 			// Intent receiveaddressintent = new Intent(SendActivity.this,
 			// ReceiveAddressActivity.class);
 			// startActivityForResult(receiveaddressintent,
 			// Constants.START_ACTIVITY.SEND_TO_RECEIVEADDRESS);
+			getAddress(END_ADDRESS);
 			break;
 		case R.id.mysend_submit:
 			publishGoods();
@@ -172,8 +185,10 @@ public class SendActivity extends Activity implements OnClickListener {
 
 	private void publishGoods() {
 		OrderBean orderBean = new OrderBean();
-		orderBean.setUid(WKApplication.getInstance().getPersonInfoBean().getId());
-		ToastUtils.showLong(context, "ID:"+WKApplication.getInstance().getPersonInfoBean().getId());
+		orderBean.setUid(WKApplication.getInstance().getPersonInfoBean()
+				.getId());
+		ToastUtils.showLong(context, "ID:"
+				+ WKApplication.getInstance().getPersonInfoBean().getId());
 		orderBean.setTag("e1");
 		String category = type.getText().toString();
 		if (TextUtils.isEmpty(category)) {
@@ -191,7 +206,7 @@ public class SendActivity extends Activity implements OnClickListener {
 			return;
 		}
 		orderBean.setGname(gname);
-		String weight =this.weight.getText().toString();
+		String weight = this.weight.getText().toString();
 		if (TextUtils.isEmpty(weight)) {
 			findViewById(R.id.mysend_weight).startAnimation(
 					AnimationUtils.loadAnimation(context, R.anim.shake));
@@ -221,7 +236,8 @@ public class SendActivity extends Activity implements OnClickListener {
 		if (TextUtils.isEmpty(s_tel)) {
 			findViewById(R.id.mysend_sendtel).startAnimation(
 					AnimationUtils.loadAnimation(context, R.anim.shake));
-			ToastUtils.showShort(context, getString(R.string.sender_phone_notice));
+			ToastUtils.showShort(context,
+					getString(R.string.sender_phone_notice));
 			return;
 		}
 		orderBean.setS_tel(s_tel);
@@ -229,7 +245,8 @@ public class SendActivity extends Activity implements OnClickListener {
 		if (TextUtils.isEmpty(s_address)) {
 			findViewById(R.id.mysend_sendaddress).startAnimation(
 					AnimationUtils.loadAnimation(context, R.anim.shake));
-			ToastUtils.showShort(context, getString(R.string.sender_address_notice));
+			ToastUtils.showShort(context,
+					getString(R.string.sender_address_notice));
 			return;
 		}
 		orderBean.setS_address(s_address);
@@ -245,7 +262,8 @@ public class SendActivity extends Activity implements OnClickListener {
 		if (TextUtils.isEmpty(r_tel)) {
 			findViewById(R.id.mysend_receivetel).startAnimation(
 					AnimationUtils.loadAnimation(context, R.anim.shake));
-			ToastUtils.showShort(context, getString(R.string.receiver_phone_notice));
+			ToastUtils.showShort(context,
+					getString(R.string.receiver_phone_notice));
 			return;
 		}
 		orderBean.setR_tel(r_tel);
@@ -253,7 +271,8 @@ public class SendActivity extends Activity implements OnClickListener {
 		if (TextUtils.isEmpty(r_tel)) {
 			findViewById(R.id.mysend_receiveaddress).startAnimation(
 					AnimationUtils.loadAnimation(context, R.anim.shake));
-			ToastUtils.showShort(context, getString(R.string.receiver_phone_notice));
+			ToastUtils.showShort(context,
+					getString(R.string.receiver_phone_notice));
 			return;
 		}
 		orderBean.setR_address(r_address);
@@ -267,6 +286,17 @@ public class SendActivity extends Activity implements OnClickListener {
 				NoticeUtils.showSuccessfulNotification(context);
 			}
 		});
+	}
+
+	private void getAddress(int id) {
+		Intent intent = new Intent();
+		intent.setClass(context, MyAddressActivity.class);
+		intent.putExtra("getaddress", true);
+		if (id == START_ADDRESS) {
+			startActivityForResult(intent, START_ADDRESS);
+		} else {
+			startActivityForResult(intent, END_ADDRESS);
+		}
 	}
 
 }

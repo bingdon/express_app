@@ -148,7 +148,7 @@ public class RouteActivity extends Activity implements OnClickListener,
 									.getJSONObject(1) + "");
 					orderBean.setHeadimage(personInfoBean.getHeadimage());
 					if (!dealOrder(orderBean)) {
-						orderBeans.add(orderBean);
+						orderBeans.add(0,orderBean);
 					}
 
 				}

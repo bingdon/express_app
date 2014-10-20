@@ -160,6 +160,7 @@
             android:theme="@style/AppBaseTheme" >
         </activity>
         <activity android:name=".main.GetOrderSuccessActivity" android:theme="@style/AppBaseTheme"></activity>
+        <activity android:theme="@style/AppBaseTheme" android:name=".main.TraceActivity"></activity>
     </application>
 
 </manifest>

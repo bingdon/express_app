@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -42,6 +43,7 @@ import com.wukong.bean.OrderBean;
 import com.wukong.httpUtils.GsonUtlity;
 import com.wukong.httpUtils.HttpUtility;
 import com.wukong.main.RouteActivity;
+import com.wukong.main.TraceActivity;
 import com.wukong.support.debug.AppLog;
 import com.wukong.utils.ToastUtils;
 import com.wukong.utils.WKHttpClient;
@@ -105,7 +107,7 @@ public class OrderFragment extends Fragment implements OnClickListener,
 		order_miss = (TextView) view.findViewById(R.id.order_miss);
 		orderlist = (PullToRefreshListView) view
 				.findViewById(R.id.order_listview);
-		orderlistReal=orderlist.getRefreshableView();
+		orderlistReal = orderlist.getRefreshableView();
 		registerForContextMenu(orderlistReal);
 		/******* 改变标题栏 *******/
 		headbar_txt.setText("我的订单");
@@ -168,7 +170,11 @@ public class OrderFragment extends Fragment implements OnClickListener,
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		// TODO Auto-generated method stub
-		ToastUtils.showShort(getActivity(), "ID:"+list.get(arg2-1).getId());
+		ToastUtils.showShort(getActivity(), "ID:" + list.get(arg2 - 1).getTid());
+		Intent intent=new Intent();
+		intent.putExtra("id", list.get(arg2 - 1).getTid());
+		intent.setClass(getActivity(), TraceActivity.class);
+		startActivity(intent);
 	}
 
 	private void listMyOrder() {
@@ -229,7 +235,7 @@ public class OrderFragment extends Fragment implements OnClickListener,
 					OrderBean orderBean = GsonUtlity.getOrderBean(jsonArray
 							.getJSONObject(i) + "");
 					if (!dealOrder(orderBean)) {
-						list.add(orderBean);
+						list.add(0, orderBean);
 					}
 				}
 				orderadapter.notifyDataSetChanged();
@@ -239,7 +245,6 @@ public class OrderFragment extends Fragment implements OnClickListener,
 			}
 		}
 	}
-	
 
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
@@ -255,9 +260,9 @@ public class OrderFragment extends Fragment implements OnClickListener,
 		// TODO Auto-generated method stub
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
 				.getMenuInfo();
-		if (item.getItemId()==R.id.delete) {
-			AppLog.i("位置:"+info);
-			deleteOrder(info.position-1);
+		if (item.getItemId() == R.id.delete) {
+			AppLog.i("位置:" + info);
+			deleteOrder(info.position - 1);
 		}
 		return super.onContextItemSelected(item);
 	}
@@ -293,15 +298,15 @@ public class OrderFragment extends Fragment implements OnClickListener,
 
 	}
 
-
-	private void deleteOrder(int position){
-		AppLog.i("位置:"+position);
-		WKHttpClient.deleteExp(list.get(position).getId(), new DelHanlder(position));
+	private void deleteOrder(int position) {
+		AppLog.i("位置:" + position);
+		WKHttpClient.deleteExp(list.get(position).getId(), new DelHanlder(
+				position));
 		list.remove(position);
 		orderadapter.notifyDataSetChanged();
 	}
-	
-	public class DelHanlder extends JsonHttpResponseHandler{
+
+	public class DelHanlder extends JsonHttpResponseHandler {
 		private int position;
 
 		public DelHanlder(int position) {
@@ -327,8 +332,7 @@ public class OrderFragment extends Fragment implements OnClickListener,
 			// TODO Auto-generated method stub
 			super.onStart();
 		}
-		
-		
+
 	}
-	
+
 }

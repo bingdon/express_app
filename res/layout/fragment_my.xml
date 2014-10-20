@@ -69,7 +69,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/mycenterbar"
-            android:background="@drawable/input_box" >
+            android:background="@drawable/input_box"
+            android:visibility="gone" >
 
             <ImageView
                 android:layout_width="wrap_content"

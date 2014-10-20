@@ -6,21 +6,27 @@ import org.json.JSONObject;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.wukong.R;
 import com.wukong.WKApplication;
+import com.wukong.data.AddressModel;
 import com.wukong.support.debug.AppLog;
 import com.wukong.support.notice.NoticeUtils;
 import com.wukong.utils.WKHttpClient;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 public class MyRouteActivity extends Activity implements OnClickListener {
 	/************* 标题栏 **************/
@@ -39,7 +45,12 @@ public class MyRouteActivity extends Activity implements OnClickListener {
 	private EditText sendWayEditText;
 	private TextView demandTextView;
 	private Context context;
-	private static final String TAG=MyRouteActivity.class.getSimpleName();
+	private static final String TAG = MyRouteActivity.class.getSimpleName();
+	private final int START_TIME = 0;
+	private final int END_TIME = 1;
+	private final int START_CAR_TIME = 2;
+	private final int START_ADDRESS = 3;
+	private final int END_ADDRESS = 4;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +58,7 @@ public class MyRouteActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.myroute_activity);
-		context=this;
+		context = this;
 		TitleView();
 	}
 
@@ -75,6 +86,11 @@ public class MyRouteActivity extends Activity implements OnClickListener {
 		left_layout.setVisibility(View.VISIBLE);
 		left_layout.setOnClickListener(this);
 		findViewById(R.id.myroute_submit).setOnClickListener(this);
+		findViewById(R.id.myroute_from_time).setOnClickListener(this);
+		findViewById(R.id.myroute_to_time).setOnClickListener(this);
+		findViewById(R.id.myroute_departure_time).setOnClickListener(this);
+		findViewById(R.id.myroute_from_address).setOnClickListener(this);
+		findViewById(R.id.myroute_to_address).setOnClickListener(this);
 	}
 
 	@Override
@@ -84,8 +100,23 @@ public class MyRouteActivity extends Activity implements OnClickListener {
 		case R.id.headbar_left_layout:
 			finish();
 			break;
+		case R.id.myroute_from_address:
+			getAddress(START_ADDRESS);
+			break;
+		case R.id.myroute_to_address:
+			getAddress(END_ADDRESS);
+			break;
 		case R.id.myroute_submit:
 			publishRout();
+			break;
+		case R.id.myroute_from_time:
+			getTime(START_TIME);
+			break;
+		case R.id.myroute_to_time:
+			getTime(END_TIME);
+			break;
+		case R.id.myroute_departure_time:
+			getTime(START_CAR_TIME);
 			break;
 		default:
 			break;
@@ -161,11 +192,86 @@ public class MyRouteActivity extends Activity implements OnClickListener {
 				JSONObject response) {
 			// TODO Auto-generated method stub
 			super.onSuccess(statusCode, headers, response);
-			AppLog.i(TAG, "发布行程:"+response);
+			AppLog.i(TAG, "发布行程:" + response);
 			NoticeUtils.removeNotice(0, context);
 			NoticeUtils.showSuccessfulNotification(context);
 		};
 
 	};
+
+	private void getTime(final int id) {
+		View view = getLayoutInflater()
+				.inflate(R.layout.dialog_time_pick, null);
+		final DatePicker datePicker = (DatePicker) view
+				.findViewById(R.id.datePicker);
+		final TimePicker timePicker = (TimePicker) view
+				.findViewById(R.id.timePicker);
+		new AlertDialog.Builder(this)
+				.setView(view)
+				.setTitle(R.string.sec_time)
+				.setPositiveButton(android.R.string.ok,
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								// TODO Auto-generated method stub
+								StringBuffer time = new StringBuffer();
+								time.append(datePicker.getYear() + "-"
+										+ (datePicker.getMonth() + 1) + "-"
+										+ datePicker.getDayOfMonth());
+								time.append(" " + timePicker.getCurrentHour());
+								time.append(":" + timePicker.getCurrentMinute());
+								if (id == START_TIME) {
+									startTimeTextView.setText(time);
+								} else if (id == END_TIME) {
+									endTimeTextView.setText(time);
+								} else {
+									arriveTimeTextView.setText(time);
+								}
+							}
+						})
+				.setNegativeButton(android.R.string.cancel,
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								// TODO Auto-generated method stub
+
+							}
+						}).show();
+	}
+
+	private void getAddress(int id) {
+		Intent intent = new Intent();
+		intent.setClass(context, MyAddressActivity.class);
+		intent.putExtra("getaddress", true);
+		if (id == START_ADDRESS) {
+			startActivityForResult(intent, START_ADDRESS);
+		} else {
+			startActivityForResult(intent, END_ADDRESS);
+		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode != RESULT_OK) {
+			return;
+		}
+
+		if (requestCode == START_ADDRESS) {
+			AddressModel addressModel = (AddressModel) data
+					.getSerializableExtra("address");
+			startAddressEditText.setText(addressModel.getDetail());
+		} else if (requestCode == END_ADDRESS) {
+			AddressModel addressModel = (AddressModel) data
+					.getSerializableExtra("address");
+			endAddressEditText.setText(addressModel.getDetail());
+		}
+
+	}
 
 }

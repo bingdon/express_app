@@ -55,6 +55,16 @@ public class OrderBean implements Serializable {
 	
 	private int status;
 	
+	private String tid;
+	
+	public String getTid() {
+		return ""+tid;
+	}
+	
+	public void setTid(String tid) {
+		this.tid = tid;
+	}
+	
 	public int getStatus() {
 		return status;
 	}

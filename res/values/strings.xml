@@ -40,6 +40,8 @@
     <string name="get_order_m1">询问取货时间</string>
     <string name="get_order_success">抢单成功</string>
     <string name="back">返回</string>
-     <string name="delete">删除</string>
+    <string name="delete">删除</string>
+    <string name="sec_time">选择时间</string>
+     <string name="activity_trace_title">快件跟踪</string>
 
 </resources>

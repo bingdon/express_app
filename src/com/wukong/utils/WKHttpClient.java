@@ -313,6 +313,15 @@ public class WKHttpClient {
 		params.put("remarks", orderBean.getRemarks());
 		params.put("cost", orderBean.getCost());
 		params.put("tag", orderBean.getTag());
+//		try {
+//			params = new RequestParams(Bean2HashMapUtility.strToHash(orderBean));
+//		} catch (IllegalArgumentException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IllegalAccessException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		client.post(POST_GOODS, params, handler);
 		AppLog.i(POST_GOODS + "?" + params);
 	}
