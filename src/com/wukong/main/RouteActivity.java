@@ -49,6 +49,7 @@ public class RouteActivity extends Activity implements OnClickListener,
 	private List<OrderBean> orderBeans = new ArrayList<OrderBean>();
 	private String json = "";
 	private int position;
+	private String tag = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,11 +68,16 @@ public class RouteActivity extends Activity implements OnClickListener,
 
 	private void titleView() {
 		// TODO Auto-generated method stub
+		tag = getIntent().getStringExtra("tag");
 		head_txt = (TextView) findViewById(R.id.headbar_txt);
 		left_layout = (RelativeLayout) findViewById(R.id.headbar_left_layout);
 		headbar_left_image = (ImageView) findViewById(R.id.headbar_left_btn);
 		headbar_left_txt = (TextView) findViewById(R.id.headbar_left_txt);
-		head_txt.setText("同城路线");
+		if (tag.equals("e1")) {
+			head_txt.setText("同城路线");
+		}else {
+			head_txt.setText("长途路线");
+		}
 		headbar_left_image.setBackgroundResource(R.drawable.actionbar_return);
 		headbar_left_txt.setText("返回");
 		left_layout.setVisibility(View.VISIBLE);
@@ -85,14 +91,14 @@ public class RouteActivity extends Activity implements OnClickListener,
 		case R.id.headbar_left_layout:// 返回键
 			finish();
 			break;
-			
+
 		default:
 			break;
 		}
 	}
 
 	private void listToOrder() {
-		WKHttpClient.secExpress("e1", handler);
+		WKHttpClient.secExpress(tag, handler);
 	}
 
 	private JsonHttpResponseHandler handler = new JsonHttpResponseHandler() {
@@ -148,7 +154,7 @@ public class RouteActivity extends Activity implements OnClickListener,
 									.getJSONObject(1) + "");
 					orderBean.setHeadimage(personInfoBean.getHeadimage());
 					if (!dealOrder(orderBean)) {
-						orderBeans.add(0,orderBean);
+						orderBeans.add(0, orderBean);
 					}
 
 				}
@@ -196,11 +202,11 @@ public class RouteActivity extends Activity implements OnClickListener,
 	public void getOrder(int position) {
 		// TODO Auto-generated method stub
 		WKHttpClient.postTrade(WKApplication.getInstance().getPersonInfoBean()
-				.getIde(), orderBeans.get(position).getId(), mHandler);
-		this.position=position;
+				.getId(), orderBeans.get(position).getId(), mHandler);
+		this.position = position;
 	}
 
-	private JsonHttpResponseHandler mHandler=new JsonHttpResponseHandler(){
+	private JsonHttpResponseHandler mHandler = new JsonHttpResponseHandler() {
 
 		@Override
 		public void onFailure(Throwable e, JSONObject errorResponse) {
@@ -213,7 +219,7 @@ public class RouteActivity extends Activity implements OnClickListener,
 				JSONObject response) {
 			// TODO Auto-generated method stub
 			super.onSuccess(statusCode, headers, response);
-			AppLog.i(TAG, "抢单结果:"+response);
+			AppLog.i(TAG, "抢单结果:" + response);
 			parseGetOrder(response);
 		}
 
@@ -222,21 +228,20 @@ public class RouteActivity extends Activity implements OnClickListener,
 			// TODO Auto-generated method stub
 			super.onStart();
 		}
-		
+
 	};
-	
-	
-	private void parseGetOrder(JSONObject response){
+
+	private void parseGetOrder(JSONObject response) {
 		if (HttpUtility.isSuccess(response)) {
-			Intent intent=new Intent();
+			Intent intent = new Intent();
 			intent.setClass(this, GetOrderSuccessActivity.class);
 			intent.putExtra("tel", orderBeans.get(position).getS_tel());
 			startActivity(intent);
 			orderBeans.remove(position);
 			routeadapter.notifyDataSetChanged();
-		}else {
+		} else {
 			ToastUtils.showLong(this, "抢单失败");
 		}
 	}
-	
+
 }

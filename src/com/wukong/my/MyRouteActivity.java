@@ -167,7 +167,7 @@ public class MyRouteActivity extends Activity implements OnClickListener {
 		String arriveTime = arriveTimeTextView.getText().toString();
 		String require = demandTextView.getText().toString();
 		WKHttpClient.postSchedule(WKApplication.getInstance()
-				.getPersonInfoBean().getIde(), startaddress, endAddress,
+				.getPersonInfoBean().getId(), startaddress, endAddress,
 				vehicle, trainid, startTime, endTime, recivie, sendway,
 				require, handler);
 	}

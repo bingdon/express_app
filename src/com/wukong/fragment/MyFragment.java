@@ -32,6 +32,7 @@ import com.wukong.my.MyDataActivity;
 import com.wukong.my.MyOrderActivity;
 import com.wukong.my.MyRouteActivity;
 import com.wukong.support.image.LoadImageUtility;
+import com.wukong.utils.ShareUtility;
 import com.wukong.utils.WKHttpClient;
 
 public class MyFragment extends Fragment implements OnClickListener {
@@ -134,35 +135,36 @@ public class MyFragment extends Fragment implements OnClickListener {
 		return view;
 
 	}
-	
+
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		getActivity().unregisterReceiver(receiver);
 	}
-	
-	
-	private void initView(){
-		PersonInfoBean personInfoBean=WKApplication.getInstance().getPersonInfoBean();
-		if (personInfoBean==null) {
+
+	private void initView() {
+		PersonInfoBean personInfoBean = WKApplication.getInstance()
+				.getPersonInfoBean();
+		if (personInfoBean == null) {
 			return;
 		}
-		
+
 		name.setText(personInfoBean.getUsername());
-		LoadImageUtility.displayWebImage(WKHttpClient.IMAGER_URL+personInfoBean.getHeadimage(), myhead);
+		LoadImageUtility.displayWebImage(WKHttpClient.IMAGER_URL
+				+ personInfoBean.getHeadimage(), myhead);
 	}
 
 	private void GetUser(String id) {
 		// TODO Auto-generated method stub
-		JsonHttpResponseHandler res =new JsonHttpResponseHandler(){
+		JsonHttpResponseHandler res = new JsonHttpResponseHandler() {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					JSONObject response) {
 				// TODO Auto-generated method stub
 				super.onSuccess(statusCode, headers, response);
 				Log.i("TAG", "返回:" + response);
-				parseUser(""+response);
+				parseUser("" + response);
 			}
 		};
 		WKHttpClient client = new WKHttpClient();
@@ -213,31 +215,30 @@ public class MyFragment extends Fragment implements OnClickListener {
 			startActivity(addressintent);
 			break;
 		case R.id.my_share:// 分享点击事件
+			ShareUtility.share2Fre(getActivity());
 			break;
 
 		default:
 			break;
 		}
 	}
-	
-	
-	private void initFilter(){
-		IntentFilter filter=new IntentFilter();
+
+	private void initFilter() {
+		IntentFilter filter = new IntentFilter();
 		filter.addAction(ConstantS.ACTION_UPDATE_USERINFO);
 		getActivity().registerReceiver(receiver, filter);
 	}
-	
-	private BroadcastReceiver receiver=new BroadcastReceiver() {
-		
+
+	private BroadcastReceiver receiver = new BroadcastReceiver() {
+
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			// TODO Auto-generated method stub
-			String action=intent.getAction();
+			String action = intent.getAction();
 			if (action.equals(ConstantS.ACTION_UPDATE_USERINFO)) {
 				initView();
 			}
 		}
 	};
-	
-	
+
 }

@@ -154,7 +154,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/my_data"
-            android:background="@drawable/input_box" >
+            android:background="@drawable/input_box"
+            android:visibility="gone" >
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -248,7 +249,7 @@
                 android:layout_marginLeft="5dp"
                 android:gravity="center"
                 android:drawableLeft="@drawable/my_icon8"
-                android:text="分享给朋友拿奖励"
+                android:text="@string/share_title"
                 android:textSize="18sp" />
 
         </RelativeLayout>

@@ -104,16 +104,23 @@ public class MainFragment extends Fragment implements OnClickListener {
 		// TODO Auto-generated method stub
 		switch (arg0.getId()) {
 		case R.id.city_wide_layout:// 同城发件点击事件
+			Intent intent1 = new Intent(getActivity(), SendActivity.class);
+			intent1.putExtra("tag", "e1");
+			startActivity(intent1);
+			break;
 		case R.id.different_places_layout:// 异地发件点击事件
 			Intent intent = new Intent(getActivity(), SendActivity.class);
+			intent.putExtra("tag", "e2");
 			startActivity(intent);
 			break;
 		case R.id.long_distance_route_layout:// 长途线路点击事件
 			Intent routeintent1 = new Intent(getActivity(), RouteActivity.class);
+			routeintent1.putExtra("tag", "e2");
 			startActivity(routeintent1);
 			break;
 		case R.id.city_route_layout:// 同城线路点击事件
 			Intent routeintent2 = new Intent(getActivity(), RouteActivity.class);
+			routeintent2.putExtra("tag", "e1");
 			startActivity(routeintent2);
 			break;
 

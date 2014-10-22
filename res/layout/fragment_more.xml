@@ -54,7 +54,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/more_freight"
-                android:background="@drawable/input_box" >
+                android:background="@drawable/input_box"
+                android:visibility="gone" >
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -68,12 +69,12 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
-                    android:layout_toRightOf="@+id/imageView1"
+                    android:layout_toRightOf="@+id/more_send_receive_img"
                     android:text="收送范围"
                     android:textSize="18sp" />
 
                 <ImageView
-                    android:id="@+id/imageView1"
+                    android:id="@+id/more_send_receive_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -100,12 +101,12 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
-                    android:layout_toRightOf="@+id/imageView1"
+                    android:layout_toRightOf="@+id/more_ban_img"
                     android:text="禁寄品查询"
                     android:textSize="18sp" />
 
                 <ImageView
-                    android:id="@+id/imageView1"
+                    android:id="@+id/more_ban_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -132,12 +133,12 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
-                    android:layout_toRightOf="@+id/imageView1"
+                    android:layout_toRightOf="@+id/more_value_img"
                     android:text="增值服务"
                     android:textSize="18sp" />
 
                 <ImageView
-                    android:id="@+id/imageView1"
+                    android:id="@+id/more_value_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -164,12 +165,12 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
-                    android:layout_toRightOf="@+id/imageView1"
+                    android:layout_toRightOf="@+id/more_suggest_img"
                     android:text="提建议，拿奖励"
                     android:textSize="18sp" />
 
                 <ImageView
-                    android:id="@+id/imageView1"
+                    android:id="@+id/more_suggest_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -196,12 +197,12 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
-                    android:layout_toRightOf="@+id/imageView1"
+                    android:layout_toRightOf="@+id/more_about_img"
                     android:text="关于悟空帮递"
                     android:textSize="18sp" />
 
                 <ImageView
-                    android:id="@+id/imageView1"
+                    android:id="@+id/more_about_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -228,12 +229,12 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
-                    android:layout_toRightOf="@+id/imageView1"
+                    android:layout_toRightOf="@+id/more_contact_img"
                     android:text="联系悟空帮递"
                     android:textSize="18sp" />
 
                 <ImageView
-                    android:id="@+id/imageView1"
+                    android:id="@+id/more_contact_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"

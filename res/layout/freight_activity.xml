@@ -15,7 +15,7 @@
 
         <RelativeLayout
             android:id="@+id/relativeLayout1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/input_box" >
@@ -29,14 +29,15 @@
                 android:text="出发地点"
                 android:textSize="18sp" />
 
-            <TextView
+            <EditText
                 android:id="@+id/freight_from"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="35dp"
-                android:text="北京 "
+                android:background="@color/transparent"
+                android:hint="例如什刹海"
                 android:textSize="18sp" />
 
             <ImageView
@@ -50,7 +51,7 @@
 
         <RelativeLayout
             android:id="@+id/relativeLayout2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/relativeLayout1"
             android:background="@drawable/input_box" >
@@ -64,14 +65,15 @@
                 android:text="到达地点"
                 android:textSize="18sp" />
 
-            <TextView
+            <EditText
                 android:id="@+id/freight_to"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="35dp"
-                android:text="北京 "
+                android:background="@color/transparent"
+                android:hint="例如皇后大道"
                 android:textSize="18sp" />
 
             <ImageView
@@ -85,7 +87,7 @@
 
         <RelativeLayout
             android:id="@+id/freight_type"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/relativeLayout2"
             android:background="@drawable/input_box" >
@@ -120,7 +122,7 @@
 
         <RelativeLayout
             android:id="@+id/freight_height"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/freight_type"
             android:background="@drawable/input_box" >
@@ -145,6 +147,14 @@
                 android:hint="输入重量"
                 android:singleLine="true"
                 android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:text="KG" />
         </RelativeLayout>
 
         <Button
@@ -178,7 +188,6 @@
             android:layout_marginTop="28dp"
             android:text="运费价格566.00元"
             android:textSize="15sp" />
-
     </RelativeLayout>
 
 </RelativeLayout>

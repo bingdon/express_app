@@ -42,6 +42,16 @@
     <string name="back">返回</string>
     <string name="delete">删除</string>
     <string name="sec_time">选择时间</string>
-     <string name="activity_trace_title">快件跟踪</string>
+    <string name="activity_trace_title">快件跟踪</string>
+    <string name="trace_content0">快递员</string>
+    <string name="trace_content1">已经从</string>
+    <string name="trace_content2">站出发预计</string>
+    <string name="trace_content3">到达下一站</string>
+    <string name="trace_done">已收件</string>
+    <string name="confir_done">确认收货 </string>
+    <string name="confiring">确认中&#8230; </string>
+    <string name="share_title">分享给朋友拿奖励 </string>
+    <string name="share_content">快递速度哪家强?悟空帮递来帮忙!</string>
+    <string name="cost_search_ing">查询中&#8230; </string>
 
 </resources>

@@ -26,6 +26,7 @@ import com.wukong.WKApplication;
 import com.wukong.bean.PersonInfoBean;
 import com.wukong.httpUtils.GsonUtlity;
 import com.wukong.support.debug.AppLog;
+import com.wukong.support.image.LoadImageUtility;
 import com.wukong.utils.ToastUtils;
 import com.wukong.utils.UIUtils;
 import com.wukong.utils.WKHttpClient;
@@ -85,8 +86,8 @@ public class LoginActivity extends Activity implements OnClickListener {
 		password_clear.setOnClickListener(this);
 		login_sure.setOnClickListener(this);
 		find_password.setOnClickListener(this);
-		
-		progressDialog=new ProgressDialog(this);
+
+		progressDialog = new ProgressDialog(this);
 		progressDialog.setMessage(getString(R.string.login_ing));
 	}
 
@@ -159,32 +160,31 @@ public class LoginActivity extends Activity implements OnClickListener {
 	private void doLogin(String username, String password) {
 		// TODO Auto-generated method stub
 		JsonHttpResponseHandler res = new JsonHttpResponseHandler() {
-			
+
 			@Override
 			public void onStart() {
 				// TODO Auto-generated method stub
 				super.onStart();
 				progressDialog.show();
 			}
-			
+
 			@Override
 			public void onFinish() {
 				// TODO Auto-generated method stub
 				super.onFinish();
 				progressDialog.dismiss();
 			}
-			
-			
+
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					JSONObject response) {
 				// TODO Auto-generated method stub
 				super.onSuccess(statusCode, headers, response);
-				System.out.println(""+response);
-				parseUser(""+response);
+				System.out.println("" + response);
+				parseUser("" + response);
 				// TODO Auto-generated method stub
 				try {
-					JSONObject obj = new JSONObject(""+response);
+					JSONObject obj = new JSONObject("" + response);
 					if (obj.getInt("result") == 1) {
 						ToastUtils.showShort(getApplicationContext(), "登录成功！");
 						Intent intent = new Intent(LoginActivity.this,
@@ -197,7 +197,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 					e.printStackTrace();
 				}
 			}
-			
+
 		};
 		WKHttpClient client = new WKHttpClient();
 		client.doHttpLogin(username, password, res);
@@ -208,8 +208,9 @@ public class LoginActivity extends Activity implements OnClickListener {
 		try {
 			JSONObject result = new JSONObject(response);
 			JSONObject obj = result.getJSONObject("user");
-			AppLog.i(TAG, "用户数据:"+obj);
-			PersonInfoBean personInfoBean=GsonUtlity.getPersonInfoBean(obj.toString());
+			AppLog.i(TAG, "用户数据:" + obj);
+			PersonInfoBean personInfoBean = GsonUtlity.getPersonInfoBean(obj
+					.toString());
 			WKApplication.getInstance().setPersonInfoBean(personInfoBean);
 			if (obj != null) {
 				id = obj.getString("id");
@@ -223,16 +224,18 @@ public class LoginActivity extends Activity implements OnClickListener {
 			e.printStackTrace();
 		}
 	}
-	
-	private void setView(){
-		PersonInfoBean personInfoBean=WKApplication.getInstance().getPersonInfoBean();
-		if (personInfoBean==null) {
+
+	private void setView() {
+		PersonInfoBean personInfoBean = WKApplication.getInstance()
+				.getPersonInfoBean();
+		if (personInfoBean == null) {
 			return;
 		}
-		
+
 		name.setText(personInfoBean.getTel());
 		password.setText(personInfoBean.getPassword());
-		
+		LoadImageUtility.displayWebImage(WKHttpClient.IMAGER_URL
+				+ personInfoBean.getHeadimage(), headview);
 	}
 
 }

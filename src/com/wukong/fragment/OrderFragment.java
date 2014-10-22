@@ -172,7 +172,7 @@ public class OrderFragment extends Fragment implements OnClickListener,
 		// TODO Auto-generated method stub
 		ToastUtils.showShort(getActivity(), "ID:" + list.get(arg2 - 1).getTid());
 		Intent intent=new Intent();
-		intent.putExtra("id", list.get(arg2 - 1).getTid());
+		intent.putExtra("order", list.get(arg2-1));
 		intent.setClass(getActivity(), TraceActivity.class);
 		startActivity(intent);
 	}

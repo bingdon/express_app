@@ -5,6 +5,7 @@ import com.google.gson.JsonSyntaxException;
 import com.wukong.bean.GoodsTypeBean;
 import com.wukong.bean.OrderBean;
 import com.wukong.bean.PersonInfoBean;
+import com.wukong.bean.RoutBean;
 import com.wukong.support.debug.AppLog;
 
 public class GsonUtlity {
@@ -43,5 +44,21 @@ public class GsonUtlity {
 		}
 		return orderBean;
 	}
+	/**
+	 * 
+	 * @param object
+	 * @return
+	 */
+	public static RoutBean getRoutBean(String object) {
+		RoutBean routBean=new RoutBean();
+		try {
+			routBean=new Gson().fromJson(object, RoutBean.class);
+		} catch (JsonSyntaxException e) {
+			// TODO: handle exception
+			AppLog.w(TAG, "´íÎó:"+e.getMessage());
+		}
+		return routBean;
+	}
+	
 	
 }

@@ -32,6 +32,26 @@ public class RoutBean implements Serializable {
 	private String demand;
 	// 发布时间
 	private String createtime;
+	
+	private String bangName;
+	
+	private int complete;
+	
+	public int getComplete() {
+		return complete;
+	}
+	
+	public void setComplete(int complete) {
+		this.complete = complete;
+	}
+	
+	public String getBangName() {
+		return ""+bangName;
+	}
+	
+	public void setBangName(String bangName) {
+		this.bangName = bangName;
+	}
 
 	public String getId() {
 		return id;

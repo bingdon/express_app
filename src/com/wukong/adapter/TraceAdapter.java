@@ -29,25 +29,26 @@ public class TraceAdapter extends BaseAdapter {
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return 10;
+		return list.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
-		return null;
+		return list.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
 		// TODO Auto-generated method stub
-		return 0;
+		return position;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		ViewHolder holder;
+		final int absPosition = position;
 		if (convertView == null) {
 			holder = new ViewHolder();
 			convertView = inflater.inflate(R.layout.trace_item, parent, false);
@@ -60,8 +61,24 @@ public class TraceAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.time.setText("十月十日");
-		holder.content.setText("开始走了");
+		holder.time.setText(list.get(position).getCreatetime());
+		if (list.get(position).getComplete()==1) {
+			holder.content.setText(R.string.trace_done);
+		}else {
+			holder.content.setText(context.getString(R.string.trace_content0)
+					+ "\"" + list.get(position).getBangName() + "\""
+					+ context.getString(R.string.trace_content1) + "\""
+					+ list.get(position).getStart() + "\""
+					+ context.getString(R.string.trace_content2)
+					+ list.get(position).getArrivetime()
+					+ context.getString(R.string.trace_content3) + "\""
+					+ list.get(position).getEnd() + "\"");
+		}
+		if (absPosition == 0) {
+			holder.statue.setImageResource(R.drawable.ic_trace_ing);
+		} else {
+			holder.statue.setImageResource(R.drawable.ic_trace_done);
+		}
 		return convertView;
 	}
 

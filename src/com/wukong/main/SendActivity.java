@@ -63,6 +63,7 @@ public class SendActivity extends Activity implements OnClickListener {
 	private Context context;
 	private final int START_ADDRESS = 3;
 	private final int END_ADDRESS = 4;
+	private String tag = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,11 +78,17 @@ public class SendActivity extends Activity implements OnClickListener {
 
 	private void TitleView() {
 		// TODO Auto-generated method stub
+		tag = getIntent().getStringExtra("tag");
 		head_txt = (TextView) findViewById(R.id.headbar_txt);
 		left_layout = (RelativeLayout) findViewById(R.id.headbar_left_layout);
 		headbar_left_image = (ImageView) findViewById(R.id.headbar_left_btn);
 		headbar_left_txt = (TextView) findViewById(R.id.headbar_left_txt);
-		head_txt.setText("我要发货");
+		if (tag.equals("e1")) {
+			head_txt.setText("同城发货");
+		} else {
+			head_txt.setText("异地发货");
+		}
+
 		headbar_left_image.setBackgroundResource(R.drawable.actionbar_return);
 		headbar_left_txt.setText("返回");
 		left_layout.setVisibility(View.VISIBLE);
@@ -189,7 +196,7 @@ public class SendActivity extends Activity implements OnClickListener {
 				.getId());
 		ToastUtils.showLong(context, "ID:"
 				+ WKApplication.getInstance().getPersonInfoBean().getId());
-		orderBean.setTag("e1");
+		orderBean.setTag(tag);
 		String category = type.getText().toString();
 		if (TextUtils.isEmpty(category)) {
 			type_layout.startAnimation(AnimationUtils.loadAnimation(context,

@@ -81,8 +81,18 @@ public class WKHttpClient {
 	 * 跟踪快件
 	 */
 	public static final String GET_TRADER_ORDER = BASE_URL + "findByDid";
-
+	/**
+	 * 删除货物
+	 */
 	public static final String DEL_ORDER = BASE_URL + "deleteExp";
+	/**
+	 * 确认收货
+	 */
+	public static final String CONFIR_DONE = BASE_URL + "complete";
+	/**
+	 * 运费查询
+	 */
+	public static final String SEARCE_PRICE = BASE_URL + "cost";
 
 	private static AsyncHttpClient client = new AsyncHttpClient();
 
@@ -284,6 +294,7 @@ public class WKHttpClient {
 		params.put("getway", getway);
 		params.put("demand", demand);
 		client.post(POST_ROUTE, params, handler);
+		AppLog.i(POST_ROUTE + "?" + params);
 	}
 
 	/**
@@ -313,15 +324,15 @@ public class WKHttpClient {
 		params.put("remarks", orderBean.getRemarks());
 		params.put("cost", orderBean.getCost());
 		params.put("tag", orderBean.getTag());
-//		try {
-//			params = new RequestParams(Bean2HashMapUtility.strToHash(orderBean));
-//		} catch (IllegalArgumentException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IllegalAccessException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		// try {
+		// params = new RequestParams(Bean2HashMapUtility.strToHash(orderBean));
+		// } catch (IllegalArgumentException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// } catch (IllegalAccessException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
 		client.post(POST_GOODS, params, handler);
 		AppLog.i(POST_GOODS + "?" + params);
 	}
@@ -411,4 +422,41 @@ public class WKHttpClient {
 		params.put("id", id);
 		client.post(DEL_ORDER, params, handler);
 	}
+
+	/**
+	 * 确认收货
+	 * 
+	 * @param id
+	 *            货单ID
+	 * @param handler
+	 */
+	public static void complete(String id, AsyncHttpResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("id", id);
+		client.post(CONFIR_DONE, params, handler);
+	}
+
+	/**
+	 * 查询运费
+	 * 
+	 * @param start
+	 *            出发地
+	 * @param end
+	 *            目的地
+	 * @param type
+	 *            商品类型
+	 * @param weight
+	 *            质量
+	 * @param handler
+	 */
+	public static void cost(String start, String end, String type,
+			String weight, AsyncHttpResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("start", start);
+		params.put("end", end);
+		params.put("type", type);
+		params.put("weight", weight);
+		client.post(CONFIR_DONE, params, handler);
+	}
+
 }
